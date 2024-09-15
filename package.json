@@ -3,7 +3,9 @@
 	"version": "0.0.1",
 	"description": "InfoSec project for freeCodeCamp",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js",
+		"test": "node test-runner.js"
+
 	},
 	"dependencies": {
 		"body-parser": "^1.15.2",
