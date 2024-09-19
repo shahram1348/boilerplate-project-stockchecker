@@ -11,14 +11,14 @@ module.exports = function (app) {
   const likes = new Map();
 
   app.route("/api/stock-prices").get(async function (req, res) {
-    const anonymizedIp = anonymizeIp(req.ip);
+    const anonymizeIp = anonymizeIp(req.ip);
 
     const { stock, like } = req.query;
     try {
       if (Array.isArray(stock)) {
         // Handle multiple stocks
         const results = await Promise.all(
-          stock.map((s) => getStockData(s, like === "true", anonymizedIp))
+          stock.map((s) => getStockData(s, like === "true", anonymizeIp))
         );
         const [stock1, stock2] = results;
         const rel_likes1 = stock1.likes - stock2.likes;
@@ -31,7 +31,7 @@ module.exports = function (app) {
         });
       } else {
         // Handle single stock
-        const result = await getStockData(stock, like === "true", anonymizedIp);
+        const result = await getStockData(stock, like === "true", anonymizeIp);
         res.json({ stockData: result });
       }
     } catch (error) {
